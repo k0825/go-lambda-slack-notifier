@@ -18,7 +18,7 @@ resource "null_resource" "default" {
     always_run = timestamp()
   }
   provisioner "local-exec" {
-    command = "cd ./lambda/cmd/ && GOOS=linux GOARCH=amd64 go build -o ../../build/main main.go"
+    command = "cd ./lambda/cmd/ && GOOS=linux GOARCH=amd64 go build -o ../build/main main.go"
   }
 }
 

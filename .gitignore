@@ -12,3 +12,5 @@ crash.log
 **/archive/*.zip
 **/build/main
 *.tfvars
+
+.DS_STORE
