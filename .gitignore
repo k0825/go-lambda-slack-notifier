@@ -9,3 +9,5 @@ crash.log
 *.tfstate
 *.log
 .terraform.lock.hcl
+**/archive/*.zip
+**/build/main

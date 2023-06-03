@@ -12,7 +12,7 @@ resource "null_resource" "default" {
     always_run = timestamp()
   }
   provisioner "local-exec" {
-    command = "GOOS=linux GOARCH=amd64 go build -o ./lambda/build/main ./lambda/src/go-lambda-slack-notifier/main.go"
+    command = "cd ./lambda/src/go-lambda-slack-notifier && GOOS=linux GOARCH=amd64 go build -o ../../build/main main.go"
   }
 }
 
