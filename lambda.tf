@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "lambda" {
-  function_name    = "go-lambda-sample"
+  function_name    = "go-lambda-slack-notifier"
   filename         = "./lambda/archive/main.zip"
   role             = aws_iam_role.lambda_role.arn
   handler          = "main"
@@ -12,7 +12,7 @@ resource "null_resource" "default" {
     always_run = timestamp()
   }
   provisioner "local-exec" {
-    command = "GOOS = linux GOARCH = amd64 go build -o ./lambda/build/main ./lambda/src/lambda-sample/main.go"
+    command = "GOOS = linux GOARCH = amd64 go build -o ./lambda/build/main ./lambda/src/go-lambda-slack-notifier/main.go"
   }
 }
 

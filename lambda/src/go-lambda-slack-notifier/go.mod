@@ -1,4 +1,4 @@
-module lambda-sample
+module go-lambda-slack-notifier
 
 go 1.19
 
