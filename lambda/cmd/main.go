@@ -2,7 +2,8 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"go-lambda-slack-notifier/slack"
+	"os"
 
 	"github.com/aws/aws-lambda-go/lambda"
 )
@@ -12,7 +13,12 @@ type MyEvent struct {
 }
 
 func HandleRequest(ctx context.Context, name MyEvent) (string, error) {
-	return fmt.Sprintf("Hello %s!", name.Name), nil
+	webhookUrl := os.Getenv("SLACK_WEBHOOK_URL")
+	if slack.PostMessage(webhookUrl, "Hello, "+name.Name) != nil {
+		return "Error", nil
+	} else {
+		return "Success", nil
+	}
 }
 
 func main() {
