@@ -11,3 +11,4 @@ crash.log
 .terraform.lock.hcl
 **/archive/*.zip
 **/build/main
+*.tfvars
