@@ -25,6 +25,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: setup golang
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.20
+
       - name: create terraform.tfvars file
         run: |
           echo "slack_webhook_url = \"${{env.SLACK_WEBHOOK_URL}}\"" > ${{ env.WORKING_DIRECTORY }}/terraform.tfvars
