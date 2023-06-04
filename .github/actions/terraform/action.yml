@@ -1,8 +1,26 @@
+inputs:
+  working-directory:
+    description: "The working directory to run Terraform commands from"
+    required: true
+  aws-access-key-id:
+    description: "AWS Access Key ID"
+    required: true
+  aws-secret-access-key:
+    description: "AWS Secret Access Key"
+    required: true
+
 runs:
   using: "composite"
   steps:
     - name: Checkout
       uses: actions/checkout@v3
+
+    - name: AWS configuration
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ inputs.aws-access-key-id }}
+        aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
+        aws-region: ap-northeast-1
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
@@ -12,11 +30,26 @@ runs:
     - name: Terraform Init
       run: terraform init
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Terraform Fmt
       run: terraform fmt -check -recursive
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Terraform Validate
       run: terraform validate
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
+
+    - name: Terraform Plan
+      if: github.event_name == 'pull_request'
+      run: terraform plan
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+
+    - name: Terraform Apply
+      if: github.event_name == 'push'
+      run: terraform apply -auto-approve
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}

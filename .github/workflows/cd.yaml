@@ -1,7 +1,6 @@
-name: CI
+name: CD
 on:
-  pull_request:
-    types: [opened, reopened]
+  push:
     branches:
       - main
 
@@ -18,8 +17,8 @@ env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 jobs:
-  ci:
-    name: CI
+  cd:
+    name: CD
     runs-on: ubuntu-latest
 
     steps:
