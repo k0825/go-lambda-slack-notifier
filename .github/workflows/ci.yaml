@@ -15,7 +15,7 @@ permissions:
 env:
   WORKING_DIRECTORY: ./infra
 
-default:
+defaults:
   run:
     working-directory: ${{ env.WORKING_DIRECTORY }}
 
