@@ -1,4 +1,3 @@
-# A composite action that runs terraform init/fmt/validate
 runs:
   using: "composite"
   steps:
