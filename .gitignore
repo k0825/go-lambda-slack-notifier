@@ -14,3 +14,4 @@ crash.log
 *.tfvars
 
 .DS_STORE
+*.secrets
