@@ -1,0 +1,17 @@
+# A composite action that runs terraform init/fmt/validate
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.4.0
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Fmt
+      run: terraform fmt -check -recursive
+
+    - name: Terraform Validate
+      run: terraform validate

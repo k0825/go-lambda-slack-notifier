@@ -1,0 +1,34 @@
+name: CI
+on:
+  pull_request:
+    types: opened
+    branches:
+      - main
+
+permissions:
+  contents: read
+  issues: write
+  metadata: read
+  pull-requests: write
+  statuses: write
+
+env:
+  WORKING_DIRECTORY: ./infra
+
+default:
+  run:
+    working-directory: ${{ env.WORKING_DIRECTORY }}
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform & Terraform init/fmt/validate
+        uses: ../actions/terraform
+
+      - name: Terraform Plan
+        run: terraform plan
