@@ -32,10 +32,11 @@ func GetBottomDirectory(path string) (string, error) {
 	dir = strings.TrimSuffix(dir, "/")
 	dirs := strings.Split(dir, "/")
 
-	if len(dirs) > 0 {
-		return dirs[len(dirs)-1], nil
+	if len(dirs) == 1 && dirs[0] == "" {
+		return "", fmt.Errorf("Invalid path")
 	}
-	return "", fmt.Errorf("Invalid path")
+
+	return dirs[len(dirs)-1], nil
 }
 
 func CreateMessageFromS3EventRecord(record events.S3EventRecord) (string, error) {
