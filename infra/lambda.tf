@@ -3,7 +3,7 @@ resource "aws_lambda_function" "lambda" {
   filename         = "./lambda/archive/main.zip"
   role             = aws_iam_role.lambda_role.arn
   handler          = "main"
-  runtime          = "go1.x"
+  runtime          = "provided.al2"
   source_code_hash = data.archive_file.lambda.output_base64sha256
 
   environment {
